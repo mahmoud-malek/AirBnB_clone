@@ -12,6 +12,7 @@ from models.city import City
 from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
+import re
 
 
 class HBNBCommand(cmd.Cmd):
@@ -22,6 +23,49 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     __classes_list = {"BaseModel", "User", "State",
                       "City", "Place", "Amenity", "Review"}
+
+    def default(self, line):
+        """Handle default case for the
+        command and support <class name>.<action>()."""
+        methods = {
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "count": self.do_count,
+            "update": self.do_update
+        }
+
+        match = re.match(
+            r"(\w+)\.(all|count|show|destroy|update)\((.*)\)$", line)
+
+        if match:
+            class_name = match.group(1)
+            method_name = match.group(2)
+            args = match.group(3)
+
+            if class_name in HBNBCommand.__classes_list:
+                method = methods.get(method_name)
+
+                if ((method_name == "show" or method_name == "destroy")
+                        and args):
+                    # Remove quotes from the ID if present
+                    instance_id = args.strip("\"'")
+                    method(f"{class_name} {instance_id}")
+                else:
+                    method(class_name)
+            else:
+                print("** class doesn't exist **")
+        else:
+            print("*** Unknown syntax:", line)
+
+    def do_count(self, arg):
+        """Counts the number of instances of a class."""
+        class_name = arg
+        count = 0
+        for obj in storage.all().values():
+            if obj.__class__.__name__ == class_name:
+                count += 1
+        print(count)
 
     def do_quit(self, arg):
         """ Quit is a command to quit the console """

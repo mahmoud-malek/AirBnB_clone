@@ -25,8 +25,8 @@ class HBNBCommand(cmd.Cmd):
                       "City", "Place", "Amenity", "Review"}
 
     def default(self, line):
-        """Handle default case for the
-        command and support <class name>.<action>()."""
+        """Handle default case for the command and support
+         <class name>.<action>()."""
         methods = {
             "all": self.do_all,
             "show": self.do_show,
@@ -46,11 +46,41 @@ class HBNBCommand(cmd.Cmd):
             if class_name in HBNBCommand.__classes_list:
                 method = methods.get(method_name)
 
-                if ((method_name == "show" or method_name == "destroy")
-                        and args):
+                if method_name in ["show", "destroy"]:
                     # Remove quotes from the ID if present
                     instance_id = args.strip("\"'")
                     method(f"{class_name} {instance_id}")
+
+                elif method_name == "update":
+
+                    # Check if the argument is a dictionary
+                    if args.endswith("}"):
+
+                        instance_id, dict_string = args.split(",", 1)
+                        instance_id = instance_id.strip("\"'")
+                        try:
+
+                            attr_dict = eval(dict_string.strip())
+                            if isinstance(attr_dict, dict):
+                                for key, value in attr_dict.items():
+                                    method(
+                                        f"{class_name} \
+                                            {instance_id} {key} {value}")
+                        except (SyntaxError, NameError):
+                            print("** invalid dictionary representation **")
+                    else:
+
+                        # Individual attribute/value pair
+                        update_args = args.split(",", 2)
+                        if len(update_args) == 3:
+                            instance_id, attr_name, attr_value = update_args
+                            instance_id = instance_id.strip("\"'")
+                            attr_name = attr_name.strip("\"'")
+                            attr_value = attr_value.strip("\"'")
+                            method(
+                                f"{class_name} {instance_id} \
+                                    {attr_name} {attr_value}")
+
                 else:
                     method(class_name)
             else:
@@ -149,7 +179,8 @@ class HBNBCommand(cmd.Cmd):
         print(obj_list)
 
     def do_update(self, arg):
-        """ TO BE ADDED """
+        """Updates an instance based on the
+        class name and id by adding or updating attribute."""
 
         args = arg.split()
         data = storage.all()
@@ -172,8 +203,8 @@ class HBNBCommand(cmd.Cmd):
         else:
             class_name = args[0]
             instance_id = args[1]
-            attr_name = args[2]
-            attr_value = args[3].strip('"')
+            attr_name = args[2].strip("\"'")
+            attr_value = args[3].strip("\"'")
             key = "{}.{}".format(args[0], args[1])
             obj = data[key]
 

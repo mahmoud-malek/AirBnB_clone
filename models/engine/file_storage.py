@@ -43,6 +43,7 @@ class FileStorage:
 
     def save(self):
         """
+        this is a method where it handles
         Saves all the objects in the file storage to the JSON file.
         """
         objects = FileStorage.__objects

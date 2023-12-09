@@ -40,6 +40,7 @@ class BaseModel:
 
     def __str__(self):
         """
+        this is a method where it handles
         Return a string representation of the BaseModel instance.
         """
         return "[{}] ({}) {}". \
@@ -47,6 +48,7 @@ class BaseModel:
 
     def save(self):
         """
+        this is a method where it handles
         Update the updated_at attribute with the current datetime.
         """
         self.updated_at = datetime.datetime.now()

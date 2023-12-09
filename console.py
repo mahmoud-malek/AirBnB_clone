@@ -18,6 +18,7 @@ import re
 class HBNBCommand(cmd.Cmd):
     """ This class will be the entry point of the
     command interpreter
+    it contains methods like count, create, and so on
     """
 
     prompt = "(hbnb) "
@@ -25,7 +26,8 @@ class HBNBCommand(cmd.Cmd):
                       "City", "Place", "Amenity", "Review"}
 
     def default(self, line):
-        """Handle default case for the command and support
+        """this is a method where it
+        Handle default case for the command and support
          <class name>.<action>()."""
         methods = {
             "all": self.do_all,
@@ -89,7 +91,8 @@ class HBNBCommand(cmd.Cmd):
             print("*** Unknown syntax:", line)
 
     def do_count(self, arg):
-        """Counts the number of instances of a class."""
+        """this is a method where it handles
+        Counts the number of instances of a class."""
         class_name = arg
         count = 0
         for obj in storage.all().values():
@@ -98,16 +101,19 @@ class HBNBCommand(cmd.Cmd):
         print(count)
 
     def do_quit(self, arg):
-        """ Quit is a command to quit the console """
+        """ this is a method where it handles
+        Quit is a command to quit the console """
         return True
 
     def do_EOF(self, arg):
-        """ What to do in the end of the file """
+        """ this is a method where it handles
+        What to do in the end of the file """
         print()
         return True
 
     def emptyline(self):
-        """ do nothing when press enter on empty line """
+        """ this is a method where it handles
+        do nothing when press enter on empty line """
         pass
 
     def do_create(self, arg):

@@ -40,14 +40,16 @@ class TestBaseModel_instantiation(unittest.TestCase):
         self.assertNotEqual(b1.id, b2.id)
 
     def test_two_models_different_created_at(self):
-        """Test that two BaseModel instances have different 'created_at' times."""
+        """Test that two BaseModel instances have different
+         'created_at' times."""
         b1 = BaseModel()
         sleep(0.05)
         b2 = BaseModel()
         self.assertLess(b1.created_at, b2.created_at)
 
     def test_two_models_different_updated_at(self):
-        """Test that two BaseModel instances have different 'updated_at' times."""
+        """Test that two BaseModel instances have
+         different 'updated_at' times."""
         b1 = BaseModel()
         sleep(0.05)
         b2 = BaseModel()
@@ -67,7 +69,8 @@ class TestBaseModel_instantiation(unittest.TestCase):
         self.assertIn("'updated_at': " + dt_repr, bmstr)
 
     def test_args_unused(self):
-        """Test that instantiation with a non-kwarg argument does not affect the instance."""
+        """Test that instantiation with a non-kwarg
+        argument does not affect the instance."""
         bm = BaseModel(None)
         self.assertNotIn(None, bm.__dict__.values())
 
@@ -81,12 +84,14 @@ class TestBaseModel_instantiation(unittest.TestCase):
         self.assertEqual(bm.updated_at, dt)
 
     def test_instantiation_with_None_kwargs(self):
-        """Test that instantiation with None as keyword arguments raises TypeError."""
+        """Test that instantiation with None as
+        keyword arguments raises TypeError."""
         with self.assertRaises(TypeError):
             BaseModel(id=None, created_at=None, updated_at=None)
 
     def test_instantiation_with_args_and_kwargs(self):
-        """Test instantiation of BaseModel with both args and kwargs."""
+        """Test instantiation of BaseModel with
+         both args and kwargs."""
         dt = datetime.today()
         dt_iso = dt.isoformat()
         bm = BaseModel("12", id="345", created_at=dt_iso, updated_at=dt_iso)
@@ -139,7 +144,8 @@ class TestBaseModel_save(unittest.TestCase):
         self.assertLess(second_updated_at, bm.updated_at)
 
     def test_save_with_arg(self):
-        """Test that 'save' method does not accept any non-keyword arguments."""
+        """Test that 'save' method does
+         not accept any non-keyword arguments."""
         bm = BaseModel()
         with self.assertRaises(TypeError):
             bm.save(None)
@@ -199,12 +205,14 @@ class TestBaseModel_to_dict(unittest.TestCase):
         self.assertDictEqual(bm.to_dict(), tdict)
 
     def test_contrast_to_dict_dunder_dict(self):
-        """Test the difference between 'to_dict' and the instance's '__dict__'."""
+        """Test the difference between 'to_dict'
+         and the instance's '__dict__'."""
         bm = BaseModel()
         self.assertNotEqual(bm.to_dict(), bm.__dict__)
 
     def test_to_dict_with_arg(self):
-        """Test that 'to_dict' method does not accept any non-keyword arguments."""
+        """Test that 'to_dict' method does not accept
+         any non-keyword arguments."""
         bm = BaseModel()
         with self.assertRaises(TypeError):
             bm.to_dict(None)

@@ -1,6 +1,22 @@
 #!/usr/bin/python3
 
-""" The Control Unit Module """
+""" This module defines a command-line
+ interface for interacting with a hypothetical Airbnb-like application.
+ The interface allows users to create,
+  read, update, and delete instances of various classes, such as User,
+  State, City, Place, Amenity, and Review.
+
+The module uses the cmd module to create a command interpreter,
+ and defines several methods to handle different commands.
+  The do_create method creates
+   a new instance of a specified class and prints its ID.
+   The do_show method displays information about a
+    specific instance of a class,
+    and the do_destroy method deletes a specific instance.
+     The do_all method displays information about all instances of
+      a specified class.
+ The do_update method updates an instance of a
+  class by adding or updating an attribute. """
 
 import cmd
 from models.base_model import BaseModel

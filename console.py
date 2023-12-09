@@ -124,7 +124,9 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_show(self, arg):
-        """ TO BE ADDED """
+        """ method is used to display information about a specific instance
+         of a class that has been stored in the storage object.
+         The method takes a single argument, arg,"""
 
         args = arg.split()
         if len(args) < 1:
@@ -141,7 +143,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_destroy(self, arg):
-        """ TO BE ADDED """
+        """  method is used to delete a specific instance
+         of a class that has been stored in the storage object.  """
 
         args = arg.split()
         if len(args) == 0:
@@ -159,7 +162,10 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, arg):
-        """ TO BE ADDED """
+        """  method is used to display information about all
+         instances of a specific class that
+          have been stored in the storage object.
+         The method takes a single argument, """
 
         args = arg.split()
         obj_list = []

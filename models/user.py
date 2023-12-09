@@ -19,7 +19,9 @@ from models.base_model import BaseModel
 
 
 class User(BaseModel):
+
     """User class to represent a user."""
+
     email: str = ""
     password: str = ""
     first_name: str = ""

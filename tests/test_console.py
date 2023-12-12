@@ -1277,7 +1277,8 @@ class TestHBNBCommandHelp(unittest.TestCase):
             self.assertEqual(correctMSG, output.getvalue().strip())
 
     def test_help_show(self):
-        correctMSG = ("method is used to display information about a specific instance\n\
+        correctMSG = (
+            "method is used to display information about a specific instance\n\
          of a class that has been stored in the storage object.\n\
          The method takes a single argument, arg,")
         with patch("sys.stdout", new=StringIO()) as output:
@@ -1315,9 +1316,10 @@ class TestHBNBCommandHelp(unittest.TestCase):
             self.assertEqual(correctMSG, output.getvalue().strip())
 
     def test_help(self):
-        correctMSG = ("Documented commands (type help <topic>):\n"
-                      "========================================\n"
-                      "EOF  all  count  create  destroy  help  quit  show  update")
+        correctMSG = (
+            "Documented commands (type help <topic>):\n"
+            "========================================\n"
+            "EOF  all  count  create  destroy  help  quit  show  update")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help"))
             self.assertEqual(correctMSG, output.getvalue().strip())

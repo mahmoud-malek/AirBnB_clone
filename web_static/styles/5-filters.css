@@ -120,6 +120,7 @@
   font-size: 30px;
   justify-self: flex-start;
   width: 100%;
+  margin-left: 20px;
 }
 
 .container .places article {

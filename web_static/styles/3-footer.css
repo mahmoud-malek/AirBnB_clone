@@ -3,13 +3,11 @@ footer {
 	height: 60px;
 	width: 100%;
 	border-top: 1px solid #CCCCCC;
-	position: absolute;
-	text-align: center;
+	position: relative;
 	bottom: 0;
 	
 	/* Centering */
 	display: flex;
 	justify-content: center;
 	align-items: center; 
-
 }
